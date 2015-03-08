@@ -12,12 +12,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
-class HelloController extends Controller {
+class HelloController extends Controller
+{
 
     /**
      * @Route("/hello", name="hello")
      */
-    public function indexAction(){
+    public function indexAction()
+    {
         return $this->render('hello/index.html.twig');
     }
 }
