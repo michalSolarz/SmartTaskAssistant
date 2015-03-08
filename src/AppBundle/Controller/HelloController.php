@@ -49,7 +49,7 @@ class HelloController extends Controller
         $t->setCategory($c);
         $c->setColor("red");
         $t->setContent("qwertyuiop");
-        $t->setDueDate("now");
+        $t->setDueDate(new \DateTime('now'));
 
 
 
@@ -64,6 +64,9 @@ class HelloController extends Controller
         );
 
     }
+
+
+
 }
 
 
