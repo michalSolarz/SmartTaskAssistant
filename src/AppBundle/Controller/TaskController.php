@@ -34,7 +34,7 @@ class TaskController extends Controller
 
         if ($form->isValid()) {
 
-         //    $task = $form->getData();   mozna tez tak zamiast w create form
+            //    $task = $form->getData();   mozna tez tak zamiast w create form
 
             $em = $this->getDoctrine()->getManager();
 
@@ -44,7 +44,6 @@ class TaskController extends Controller
 
             return $this->redirect($this->generateUrl('success'));
         }
-
 
 
         return $this->render('task/new.html.twig', array(
@@ -71,13 +70,10 @@ class TaskController extends Controller
         }
 
 
-
         return $this->render('task/new.html.twig', array(
             'form' => $form->createView(),
         ));
     }
-
-
 
 
     /**
@@ -89,9 +85,8 @@ class TaskController extends Controller
         $tasks = $repository->findAll();
 
 
-        return $this->render('task/list.html.twig', array('tasks' =>$tasks));
+        return $this->render('task/list.html.twig', array('tasks' => $tasks));
     }
-
 
 
     /**
@@ -101,8 +96,6 @@ class TaskController extends Controller
     {
         return $this->render('task/success.html.twig');
     }
-
-
 
 
 }
