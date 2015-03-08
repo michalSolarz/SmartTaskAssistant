@@ -1,0 +1,50 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="task")
+ */
+class Task
+{
+
+    /**
+     * @ORM\Column(type="integer", name="tas_id")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=100, name="tas_content")
+     */
+    protected $content;
+
+    /**
+     * @ORM\Column(type="date", name="tas_due_date")
+     */
+    protected $dueDate;
+
+
+    /**
+     * @ORM\Column(type="boolean", name="tas_done")
+     */
+    protected $done;
+
+    /**
+     * @ORM\Column(type="integer", name="tas_priority")
+     */
+    protected $priority;
+
+    /**
+     * @ORM\Column(type="datetime", name="tas_created_at")
+     */
+    protected $createdAt;
+
+
+    
+
+}
