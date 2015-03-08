@@ -175,5 +175,13 @@ class User
     {
         return $this->createdAt;
     }
+
+
+     /**
+      * @ORM\ManyToOne(targetEntity="name", inversedBy="")
+      */
+     protected $category;
+
+
 }
 
