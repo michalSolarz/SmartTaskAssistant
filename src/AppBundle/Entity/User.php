@@ -5,6 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
@@ -38,15 +39,14 @@ class User
      */
     protected $createdAt;
 
-
-
-
-
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
+     */
+    protected $createdTasks;
     /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="assignee")
      **/
     protected $assignedTasks;
-
 
     /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="createdBy")
@@ -54,18 +54,23 @@ class User
     protected $createdCategories;
 
 
+ 
 
+ 
 	public function __construct()
     {
         $now = new \DateTime('now');
         $this->setCreatedAt($now);
+
+
+        $this->createdTasks = new ArrayCollection();
+
         $this->assignedTasks = new ArrayCollection();
     }
 
 
 
 
-   
 
 
 
@@ -179,3 +184,4 @@ class User
 
 
 }
+
