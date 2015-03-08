@@ -38,8 +38,15 @@ class Category
      */
     protected $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="name")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+
     public function __construct(){
         $this->createdAt = new \DateTime('now');
+        $this->User = new ArrayCollection();
     }
 
     /**
@@ -120,4 +127,13 @@ class Category
     {
         return $this->createdAt;
     }
+
+
+
+
+
+ 
+
+
+
 }
