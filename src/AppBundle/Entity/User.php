@@ -69,14 +69,6 @@ class User
     }
 
 
-
-
-
-
-
-
-
-
     /**
      * Get id
      *

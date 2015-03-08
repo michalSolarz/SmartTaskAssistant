@@ -49,7 +49,9 @@ class HelloController extends Controller
         $t->setCategory($c);
         $c->setColor("red");
         $t->setContent("qwertyuiop");
-        $t->setDueDate("now");
+        $t->setDueDate(new \DateTime('now'));
+        $t->setDone(true);
+        $t->setPriority(2);
 
 
 
@@ -59,9 +61,7 @@ class HelloController extends Controller
         $em->persist($t);
         $em->flush();
 
-        return new Response(
-           $t->getCreatedBy()
-        );
+        return $this->render('hello/index.html.twig');
 
     }
 }
