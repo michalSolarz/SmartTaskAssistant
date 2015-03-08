@@ -48,7 +48,8 @@ class Category
 
 
     public function __construct(){
-        $this->createdAt = new \DateTime('now');
+        $now = new \DateTime('now');
+        $this->setCreatedAt($now);
         $this->createdCategories = new ArrayCollection();
     }
 

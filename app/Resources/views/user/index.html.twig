@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block nav %}
+        {% block ul %}
+            <li>
+                <a href="{{ path('addUser') }}">Add user</a>
+            </li>
+        {% endblock %}
+    {% endblock %}
+
+    <table>
+        <tbody>
+        <tr>
+            <th>
+                Email
+            </th>
+            <th>
+                Name
+            </th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.name }}</td>
+                <td><a href="{{ path('editUser', {'id': user.id}) }}">Edit User</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+<h1>Tasks</h1>
+<ul>
+    {% for task in tasks %}
+        <li>{{ task.getContent() }}</li>
+    {% endfor %}
+</ul>
+
+
+
+<a href={{ path("new_task") }}>New task</a>

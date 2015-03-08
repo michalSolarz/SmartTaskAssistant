@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.content) }}
+    {{ form_row(form.dueDate) }}
+    {{ form_row(form.done) }}
+    {{ form_row(form.priority) }}
+    {{ form_row(form.assignee) }}
+    {{ form_row(form.createdBy) }}
+   {{ form_row(form.category) }}
+
+<button type="submit">Submit</button>
+{{ form_end(form) }}
