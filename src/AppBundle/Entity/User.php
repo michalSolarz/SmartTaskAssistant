@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
@@ -38,16 +40,26 @@ class User
     protected $createdAt;
 
 
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
+     */
+    protected $createdTasks;
+
+
+
 	public function __construct()
     {
         $now = new \DateTime('now');
         $this->setCreatedAt($now);
+
+        $this->createdTasks = new ArrayCollection();
     }
 
 
 
 
-   
 
 
 
@@ -156,3 +168,4 @@ class User
         return $this->createdAt;
     }
 }
+
