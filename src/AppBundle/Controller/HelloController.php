@@ -53,7 +53,7 @@ class HelloController extends Controller
         $t->setDone(true);
         $t->setPriority(2);
 
-        
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($c);
         $em->persist($u);
