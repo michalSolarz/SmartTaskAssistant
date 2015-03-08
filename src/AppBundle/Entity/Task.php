@@ -59,7 +59,11 @@ class Task
     protected $createdBy;
 
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="cat_id")
+     */
+    protected $category;
 
 
     public function __construct()
