@@ -14,7 +14,7 @@ use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-
+use AppBundle\Form\Type\CategoryType;
 
 
 
@@ -38,7 +38,7 @@ class HelloController extends Controller
     public function testAction()
     {
 
-         $t = new Task();
+        $t = new Task();
         $u = new User();
         $u->setName("drgrgrth");
         $u->setEmail("abc@xyz.com");
@@ -49,7 +49,7 @@ class HelloController extends Controller
         $t->setCategory($c);
         $c->setColor("red");
         $t->setContent("qwertyuiop");
-        $t->setDueDate("now");
+        $t->setDueDate(new \Datetime('now') );
 
 
 
@@ -64,6 +64,11 @@ class HelloController extends Controller
         );
 
     }
+
+
+ 
+
+
 }
 
 

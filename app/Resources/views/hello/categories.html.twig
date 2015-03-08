@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<table>
+	{% for category in cat %}
+		<tr><td> {{ category.name }} </td> <td><a href="{{ path('editCat', {id: category.id}) }}">edytuj</a></td></tr> 
+	{% endfor %}
+</table>
+
+
+{% endblock %}

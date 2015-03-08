@@ -40,7 +40,7 @@ class Category
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdCategories")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="use_id")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="use_id")
      */
     protected $createdBy;
 
