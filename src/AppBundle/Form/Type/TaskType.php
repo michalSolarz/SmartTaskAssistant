@@ -11,13 +11,13 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content','text')
+            ->add('content', 'text')
             ->add('dueDate', 'date')
-            ->add('done', 'checkbox')
-            ->add('priority', 'choice', array('choices'=>array('l'=>'low', 'm'=>'medium','h'=>'high','u'=>'urgent')))
-            ->add('assignee', 'entity',['class'=>'AppBundle:User', 'property'=>'name'])
-            ->add('createdBy', 'entity',['class'=>'AppBundle:User', 'property'=>'name'])
-            ->add('category', 'entity',['class'=>'AppBundle:Category', 'property'=>'name']);
+            ->add('done', 'checkbox', array('required' => false))
+            ->add('priority', 'choice', array('choices' => array('l' => 'low', 'm' => 'medium', 'h' => 'high', 'u' => 'urgent')))
+            ->add('assignee', 'entity', ['class' => 'AppBundle:User', 'property' => 'name'])
+            ->add('createdBy', 'entity', ['class' => 'AppBundle:User', 'property' => 'name'])
+            ->add('category', 'entity', ['class' => 'AppBundle:Category', 'property' => 'name']);
 
 
     }
@@ -31,7 +31,7 @@ class TaskType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Task')
+                'data_class' => 'AppBundle\Entity\Task')
         );
     }
 
