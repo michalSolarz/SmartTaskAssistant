@@ -44,7 +44,24 @@ class Task
      */
     protected $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedTasks")
+     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="use_id")
+     */
+    protected $assignee;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
+     * @ORM\JoinColumn(name="created_by_id", referencedColumnName="use_id", nullable=false)
+     */
+    protected $createdBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="category", referencedColumnName="cat_id")
+     */
+    protected $category;
+    
     public function __construct()
     {
         $now = new \DateTime('now');

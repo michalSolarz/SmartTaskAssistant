@@ -52,7 +52,7 @@ class Task
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
-     * @ORM\JoinColumn(name="tas_id", referencedColumnName="use_id", nullable=false)
+     * @ORM\JoinColumn(name="created_by_id", referencedColumnName="use_id", nullable=false)
      */
     protected $createdBy;
 
@@ -192,5 +192,74 @@ class Task
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set assignee
+     *
+     * @param \AppBundle\Entity\User $assignee
+     * @return Task
+     */
+    public function setAssignee(\AppBundle\Entity\User $assignee = null)
+    {
+        $this->assignee = $assignee;
+
+        return $this;
+    }
+
+    /**
+     * Get assignee
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getAssignee()
+    {
+        return $this->assignee;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \AppBundle\Entity\User $createdBy
+     * @return Task
+     */
+    public function setCreatedBy(\AppBundle\Entity\User $createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     * @return Task
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
