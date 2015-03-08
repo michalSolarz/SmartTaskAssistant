@@ -39,10 +39,21 @@ class User
     protected $createdAt;
 
 
+
+
+
     /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="assignee")
      **/
     protected $assignedTasks;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="createdBy")
+     **/
+    protected $createdCategories;
+
+
 
 	public function __construct()
     {
@@ -164,10 +175,7 @@ class User
     }
 
 
-     /**
-      * @ORM\ManyToOne(targetEntity="name", inversedBy="")
-      */
-     protected $category;
+
 
 
 }

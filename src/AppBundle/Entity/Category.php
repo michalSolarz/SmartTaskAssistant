@@ -44,9 +44,20 @@ class Category
      */
     protected $user;
 
+
+
+/**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdCategories")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="use_id")
+     */
+    protected $createdBy;
+
+
+
+
     public function __construct(){
         $this->createdAt = new \DateTime('now');
-        $this->User = new ArrayCollection();
+        $this->createdCategories = new ArrayCollection();
     }
 
     /**
