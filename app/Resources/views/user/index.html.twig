@@ -5,19 +5,21 @@
     {% block nav %}
         {% block ul %}
             <li>
-                <a href="{{ path('addUser') }}" >Add user</a>
+                <a href="{{ path('addUser') }}">Add user</a>
             </li>
         {% endblock %}
     {% endblock %}
 
     <table>
-        <th>
-            Email
-        </th>
-        <th>
-            Name
-        </th>
         <tbody>
+        <tr>
+            <th>
+                Email
+            </th>
+            <th>
+                Name
+            </th>
+        </tr>
         {% for user in users %}
             <tr>
                 <td>{{ user.email }}</td>
