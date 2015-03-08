@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<form method="post" {{ form_enctype(form)}}>
+	
+	{{ form_row(form.name) }}
+	{{ form_row(form.color) }}
+
+	 <input type="submit" value="wyslij"/>
+
+	 {{form_rest(form) }}
+
+</form>
+
+{% endblock %}

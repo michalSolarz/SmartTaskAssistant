@@ -14,7 +14,7 @@ use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-
+use AppBundle\Form\Type\CategoryType;
 
 
 
@@ -38,7 +38,7 @@ class HelloController extends Controller
     public function testAction()
     {
 
-         $t = new Task();
+        $t = new Task();
         $u = new User();
         $u->setName("drgrgrth");
         $u->setEmail("abc@xyz.com");
@@ -49,9 +49,8 @@ class HelloController extends Controller
         $t->setCategory($c);
         $c->setColor("red");
         $t->setContent("qwertyuiop");
-        $t->setDueDate(new \DateTime('now'));
-        $t->setDone(true);
-        $t->setPriority(2);
+        $t->setDueDate(new \Datetime('now') );
+
 
 
         $em = $this->getDoctrine()->getManager();
@@ -60,10 +59,14 @@ class HelloController extends Controller
         $em->persist($t);
         $em->flush();
 
-        return $this->render('hello/index.html.twig');
+        return new Response(
+           $t->getCreatedBy()
+        );
 
     }
 
+
+ 
 
 
 }
