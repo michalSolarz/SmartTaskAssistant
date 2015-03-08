@@ -52,20 +52,13 @@ class Task
 
 
 
+ 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
      * @ORM\JoinColumn(name="tas_id", referencedColumnName="use_id")
      */
     protected $createdBy;
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Category")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="cat_id")
-     */
-    protected $category;
-
-
+    
     public function __construct()
     {
         $now = new \DateTime('now');

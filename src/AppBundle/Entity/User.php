@@ -39,21 +39,24 @@ class User
      */
     protected $createdAt;
 
-
-
-
     /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
      */
     protected $createdTasks;
-
-
     /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="assignee")
      **/
     protected $assignedTasks;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="createdBy")
+     **/
+    protected $createdCategories;
 
+
+ 
+
+ 
 	public function __construct()
     {
         $now = new \DateTime('now');
@@ -177,10 +180,7 @@ class User
     }
 
 
-     /**
-      * @ORM\ManyToOne(targetEntity="name", inversedBy="")
-      */
-     protected $category;
+
 
 
 }
