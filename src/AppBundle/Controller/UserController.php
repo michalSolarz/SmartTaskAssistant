@@ -50,6 +50,7 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            return $this->redirect($this->generateUrl('displayUsers'));
         }
 
 
@@ -71,6 +72,7 @@ class UserController extends Controller
         if($form->handleRequest($request)->isValid()){
             $em = $this->getDoctrine()->getManager();
             $em->flush();
+            return $this->redirect($this->generateUrl('displayUsers'));
         }
 
 

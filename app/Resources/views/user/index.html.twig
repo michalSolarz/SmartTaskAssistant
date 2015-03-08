@@ -2,14 +2,22 @@
 
 {% block body %}
 
+    {% block nav %}
+        {% block ul %}
+            <li>
+                <a href="{{ path('addUser') }}" >Add user</a>
+            </li>
+        {% endblock %}
+    {% endblock %}
+
     <table>
-        <tbody>
         <th>
             Email
         </th>
         <th>
             Name
         </th>
+        <tbody>
         {% for user in users %}
             <tr>
                 <td>{{ user.email }}</td>
