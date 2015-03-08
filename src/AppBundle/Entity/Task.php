@@ -44,6 +44,11 @@ class Task
      */
     protected $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedTasks")
+     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="use_id")
+     */
+    protected $assignee;
 
     public function __construct()
     {

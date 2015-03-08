@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="use_id")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -33,15 +34,21 @@ class User
     protected $name;
 
     /**
-     * @ORM\Column(type="datetime", name="use_createat")
+     * @ORM\Column(type="datetime", name="use_created_at")
      */
     protected $createdAt;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="assignee")
+     **/
+    protected $assignedTasks;
 
 	public function __construct()
     {
         $now = new \DateTime('now');
         $this->setCreatedAt($now);
+        $this->assignedTasks = new ArrayCollection();
     }
 
 
