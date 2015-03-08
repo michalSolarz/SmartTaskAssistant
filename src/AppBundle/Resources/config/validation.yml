@@ -1,0 +1,5 @@
+AppBundle\Entity\Task:
+    properties:
+        content:
+          - NotBlank: ~
+
