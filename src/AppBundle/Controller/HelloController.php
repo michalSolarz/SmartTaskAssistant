@@ -18,6 +18,6 @@ class HelloController extends Controller {
      * @Route("/hello", name="hello")
      */
     public function indexAction(){
-        return $this->render('default/index.html.twig');
+        return $this->render('hello/index.html.twig');
     }
 }
