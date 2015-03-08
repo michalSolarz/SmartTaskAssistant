@@ -54,7 +54,6 @@ class HelloController extends Controller
         $t->setPriority(2);
 
 
-
         $em = $this->getDoctrine()->getManager();
         $em->persist($c);
         $em->persist($u);
@@ -64,6 +63,9 @@ class HelloController extends Controller
         return $this->render('hello/index.html.twig');
 
     }
+
+
+
 }
 
 
