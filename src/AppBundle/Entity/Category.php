@@ -39,14 +39,6 @@ class Category
     protected $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="name")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $user;
-
-
-
-/**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdCategories")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="use_id")
      */
