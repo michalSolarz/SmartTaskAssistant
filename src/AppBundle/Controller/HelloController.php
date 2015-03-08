@@ -50,18 +50,17 @@ class HelloController extends Controller
         $c->setColor("red");
         $t->setContent("qwertyuiop");
         $t->setDueDate(new \DateTime('now'));
+        $t->setDone(true);
+        $t->setPriority(2);
 
-
-
+        
         $em = $this->getDoctrine()->getManager();
         $em->persist($c);
         $em->persist($u);
         $em->persist($t);
         $em->flush();
 
-        return new Response(
-           $t->getCreatedBy()
-        );
+        return $this->render('hello/index.html.twig');
 
     }
 

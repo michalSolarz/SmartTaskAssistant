@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table>
+        <tbody>
+        <th>
+            Email
+        </th>
+        <th>
+            Name
+        </th>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.name }}</td>
+                <td><a href="{{ path('editUser', {'id': user.id}) }}">Edit User</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
