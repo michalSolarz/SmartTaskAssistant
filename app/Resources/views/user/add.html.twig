@@ -1,9 +1,13 @@
-{{ form_start(form) }}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
     {{ form_errors(form) }}
 
     {{ form_row(form.email |escape) }}
     {{ form_row(form.name|escape) }}
     {{ form_row(form.password|escape) }}
 
-<input type="submit"/>
-{{ form_end(form) }}
+    <input type="submit"/>
+    {{ form_end(form) }}
+{% endblock %}

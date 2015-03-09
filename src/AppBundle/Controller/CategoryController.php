@@ -26,7 +26,7 @@ class CategoryController extends Controller
          $cat = $em->findAll();
         //$query = $em->createQuery('SELECT cat_name, cat_color, cat_created, created_by FROM AppBundle:Category');
         //$categories = $query->getResult();
-        return $this->render('hello/categories.html.twig', array('cat' => $cat));
+        return $this->render('category/categories.html.twig', array('cat' => $cat));
     }
 
 
@@ -45,7 +45,7 @@ class CategoryController extends Controller
 	    	return $this->redirect($this->generateUrl('categories'));
 	    }
 
-	    return $this->render('hello/categoryAdd.html.twig',array('form' => $form->createView()));;
+	    return $this->render('category/categoryAdd.html.twig',array('form' => $form->createView()));;
 	}
 
     /**
@@ -62,7 +62,7 @@ class CategoryController extends Controller
             return $this->redirect($this->generateUrl('categories'));
         }
 
-        return $this->render('hello/categoryEdit.html.twig', array('form' => $form->createView()));;
+        return $this->render('category/categoryEdit.html.twig', array('form' => $form->createView()));;
     }
     
 }
