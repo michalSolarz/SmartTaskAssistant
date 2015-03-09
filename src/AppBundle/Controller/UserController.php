@@ -16,16 +16,14 @@ use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Form\Type\UserType;
 
 
-
-
-
 class UserController extends Controller
 {
 
     /**
      * @Route("/user", name="displayUsers")
      */
-    public function indexAction(){
+    public function indexAction()
+    {
 
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('AppBundle\Entity\User')->findAll();
@@ -46,7 +44,7 @@ class UserController extends Controller
             'action' => $this->generateUrl('addUser'),
         ));
 
-        if($form->handleRequest($request)->isValid()){
+        if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -69,7 +67,7 @@ class UserController extends Controller
             'action' => $this->generateUrl('editUser', array('id' => $user->getId())),
         ));
 
-        if($form->handleRequest($request)->isValid()){
+        if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             return $this->redirect($this->generateUrl('displayUsers'));
@@ -82,6 +80,23 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * @Route("/user/delete/{id}", name="deleteUser")
+     */
+    public function deleteUserAction(Request $request, User $user)
+    {
+        $r = $request->request->get('del');
+
+        if($r == 'Yes'){
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush();
+        }
+
+        return $this->render(
+            'user/delete.html.twig',
+            array('user' => $user,));
+    }
 
 }
 
