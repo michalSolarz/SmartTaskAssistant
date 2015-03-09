@@ -18,15 +18,15 @@ class CategoryController extends Controller
 {
 
     /**
-     * @Route("/category/", name="categories")
+     * @Route("/category/", name="listCat")
      */
     public function indexAction()
     {
          $em = $this->getDoctrine()->getRepository('AppBundle:Category');
-         $cat = $em->findAll();
+         $categories = $em->findAll();
         //$query = $em->createQuery('SELECT cat_name, cat_color, cat_created, created_by FROM AppBundle:Category');
         //$categories = $query->getResult();
-        return $this->render('hello/categories.html.twig', array('cat' => $cat));
+        return $this->render('category/categoryList.html.twig', array('categories' => $categories));
     }
 
 
@@ -42,10 +42,10 @@ class CategoryController extends Controller
 	    	$entityManager = $this->getDoctrine()->getManager();
 	    	$entityManager->persist($category);
 	    	$entityManager->flush();
-	    	return $this->redirect($this->generateUrl('categories'));
+	    	return $this->redirect($this->generateUrl('listCat'));
 	    }
 
-	    return $this->render('hello/categoryAdd.html.twig',array('form' => $form->createView()));;
+	    return $this->render('category/categoryAdd.html.twig',array('form' => $form->createView()));;
 	}
 
     /**
@@ -59,12 +59,33 @@ class CategoryController extends Controller
         if($form->handleRequest($request)->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
-            return $this->redirect($this->generateUrl('categories'));
+            return $this->redirect($this->generateUrl('listCat'));
         }
 
-        return $this->render('hello/categoryEdit.html.twig', array('form' => $form->createView()));;
+        return $this->render('category/categoryEdit.html.twig', array('form' => $form->createView()));;
     }
-    
+
+    /**
+     * @Route("/category/delete/{id}", name="delCat")
+     */
+    public function DelCategoryAction(Request $request, Category $category)
+    {
+        return $this->render('category/categoryDelete.html.twig', array('category' => $category) );
+    }
+
+    /**
+     * @Route("/category/delete/accepted/{id}", name="accDelCat")
+     */
+    public function DeleteCategoryAction(Request $request, Category $category) {   
+        
+        $form = $this->createForm(new CategoryType(), $category);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($category);
+        $entityManager->flush(); 
+   
+        return $this->redirect($this->generateUrl('listCat'));
+
+    }
 }
 
 

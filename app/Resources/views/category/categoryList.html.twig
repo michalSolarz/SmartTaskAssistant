@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Kategorie tasków</h1>
+ 
+
+<a href="{{ path('addCat')}}">+ Dodaj kategorię</a>
+<br><br>
+
+
+	<table>
+		<thead><th>Nazwa kategorii</th><th>Kolor</th><th>Autor</th><th>&nbsp;</th>
+		<tbody>	
+			{% for category in categories %}
+				<tr><td> {{ category.name }} </td>
+					<td> {{ category.color }} </td>
+					<td> {# category.createdBy #} </td>
+					<td>
+						<a href="{{ path('editCat', {id: category.id}) }}"> edytuj</a><span> </span>
+						<a href="{{ path('delCat', {id: category.id}) }}"> usuń </a>
+					</td>
+				</tr> 
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+
+{% endblock %}

@@ -13,11 +13,13 @@ class CategoryType extends AbstractType
     {
         $builder
         	->add('name', 'text')
-        	->add('color', 'choice', array( 'choices' =>  array('red', 'green', 'blue')  ) );
+        	->add('color', 'choice', array( 'choices' =>  array('red' => 'red', 'green' => 'green', 'blue' => 'blue')))
+            //->add('color', 'choice', array( 'choice_list' =>  new ChoiceList(array('red', 'g', 'b'), array('red', 'green', 'blue'))))
+            ->add('createdBy', 'entity', ['class' => 'AppBundle:User', 'property' => 'name']);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
-    	$resolver->setDefaults(['data_class' => 'AppBundle\Entity\Category']);
+    	$resolver->setDefaults(array('data_class' => 'AppBundle\Entity\Category'));
     }
 
 
@@ -25,8 +27,5 @@ class CategoryType extends AbstractType
     {
         return 'Category';
     }
-
-
-
 }
 
