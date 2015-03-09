@@ -9,6 +9,8 @@ Authors:
   - Michał Solarz
   
 ##Info
-Z tego co widzę to github nie podaje nigdzie maili więc mail do mnie: michalsolarz83@gmail.com - dorzućcie też swoje żeby można było coś podziałać w czasie tej 2 tygodniowej przerwy.
+michalsolarz83@gmail.com
 
 przemyslaw.tkaczyk@gmail.com
+
+golebiowska.agata@gmail.com

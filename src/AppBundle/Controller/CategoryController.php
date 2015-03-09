@@ -26,6 +26,7 @@ class CategoryController extends Controller
          $categories = $em->findAll();
         //$query = $em->createQuery('SELECT cat_name, cat_color, cat_created, created_by FROM AppBundle:Category');
         //$categories = $query->getResult();
+
         return $this->render('category/categoryList.html.twig', array('categories' => $categories));
     }
 
@@ -84,7 +85,6 @@ class CategoryController extends Controller
         $entityManager->flush(); 
    
         return $this->redirect($this->generateUrl('listCat'));
-
     }
 }
 

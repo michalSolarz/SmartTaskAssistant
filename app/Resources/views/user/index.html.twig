@@ -1,33 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h1>Users</h1>
 
-    {% block nav %}
-        {% block ul %}
-            <li>
-                <a href="{{ path('addUser') }}">Add user</a>
-            </li>
-        {% endblock %}
-    {% endblock %}
+    <p>
+        <a href="{{ path('addUser') }}">Add user</a>
+    </p>
 
-    <table>
-        <tbody>
+    <table class="table">
         <tr>
-            <th>
-                Email
-            </th>
-            <th>
-                Name
-            </th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>&nbsp;</th>
         </tr>
         {% for user in users %}
             <tr>
-                <td>{{ user.email }}</td>
-                <td>{{ user.name }}</td>
+                <td>{{ user.email | escape }}</td>
+                <td>{{ user.name | escape }}</td>
                 <td><a href="{{ path('editUser', {'id': user.id}) }}">Edit User</a></td>
             </tr>
         {% endfor %}
-        </tbody>
     </table>
-
 {% endblock %}
