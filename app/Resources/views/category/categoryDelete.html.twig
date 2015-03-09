@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+Czy na pewno chcesz usunąć kategorię: <strong>{{ category.name }}</strong> 
+{{ category.id }}
+
+<a class="btn btn-default" href="{{ path('accDelCat', {id: category.id})}}">Tak</a> 
+<a class="btn btn-default" href="{{ path('listCat') }}">Nie</a>
+ 
+
+{% endblock %}
