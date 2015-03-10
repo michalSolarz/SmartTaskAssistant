@@ -1,14 +1,33 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
     <h1>Tasks</h1>
-    <ul>
+    <p><a href={{ path("new_task") }}>New task</a></p>
+    <table class="table">
+        <tr>
+            <th>Description</th>
+            <th>Due date</th>
+            <th>Done?</th>
+            <th>Priority</th>
+            <th>Assignee</th>
+            <th>Created by</th>
+            <th>Category</th>
+            <th></th>
+            <th></th>
+        </tr>
         {% for task in tasks %}
-            <li>{{ task.getContent() }}</li>
+            <tr>
+                <td>{{ task.getContent() }}</td>
+                <td>{{ task.getDueDateAsString() }}</td>
+                <td>{{ task.getDoneAsYesNo() }}</td>
+                <td>{{ task.getPriorityAsString() }}</td>
+                <td>{{ task.getAssignee().getName() }}</td>
+                <td>{{ task.getCreatedBy().getName() }}</td>
+                <td>{{ task.getCategory().getName() }}</td>
+                <td><form action="{{ path('edit_task', {id: task.id}) }}" method="post"><input type="submit" value="Edit"></form></td>
+                <td><form action="{{ path('delete_task', {id: task.id}) }}" method="post"><input type="submit" value="Delete"></form></td>
+            </tr>
         {% endfor %}
-    </ul>
-
-
-
-    <a href={{ path("new_task") }}>New task</a>
+    </table>
 {% endblock %}

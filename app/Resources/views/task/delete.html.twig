@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p>Do you really want to do it?</p>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.tak) }}   {{ form_row(form.nie) }}
+    {{ form_end(form) }}
+{% endblock %}

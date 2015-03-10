@@ -61,7 +61,7 @@ class Task
      * @ORM\JoinColumn(name="category", referencedColumnName="cat_id")
      */
     protected $category;
-    
+
     public function __construct()
     {
         $now = new \DateTime('now');
@@ -72,7 +72,7 @@ class Task
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -95,7 +95,7 @@ class Task
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -118,7 +118,7 @@ class Task
     /**
      * Get dueDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDueDate()
     {
@@ -141,7 +141,7 @@ class Task
     /**
      * Get done
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getDone()
     {
@@ -164,7 +164,7 @@ class Task
     /**
      * Get priority
      *
-     * @return integer 
+     * @return integer
      */
     public function getPriority()
     {
@@ -187,7 +187,7 @@ class Task
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -210,7 +210,7 @@ class Task
     /**
      * Get assignee
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getAssignee()
     {
@@ -233,7 +233,7 @@ class Task
     /**
      * Get createdBy
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getCreatedBy()
     {
@@ -256,10 +256,41 @@ class Task
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category 
+     * @return \AppBundle\Entity\Category
      */
     public function getCategory()
     {
         return $this->category;
     }
+
+    public function getDueDateAsString()
+    {
+        return date_format($this->dueDate, 'Y-m-d');
+    }
+
+    public function getDoneAsYesNo()
+    {
+        return $this->done ? 'yes' : 'no';
+    }
+
+    public function getPriorityAsString()
+    {
+
+        switch ($this->priority) {
+            case 'low':
+                $p = 'low';
+                break;
+            case 'medium':
+                $p = 'medium';
+                break;
+            case 'high':
+                $p = 'high';
+                break;
+            case 'urgent':
+                $p = 'urgent';
+                break;
+        }
+        return $p;
+    }
+
 }

@@ -12,9 +12,11 @@ use AppBundle\Entity\Task;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\TaskType;
+use AppBundle\Form\Type\YesNoType;
 
 
 class TaskController extends Controller
@@ -25,11 +27,8 @@ class TaskController extends Controller
      */
     public function newTaskAction(Request $request)
     {
-
         $task = new Task();  //*
-
         $form = $this->createForm(new TaskType(), $task);  //*
-
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -37,16 +36,12 @@ class TaskController extends Controller
             //    $task = $form->getData();   mozna tez tak zamiast w create form
 
             $em = $this->getDoctrine()->getManager();
-
             $em->persist($task);
             $em->flush();
-
-
-            return $this->redirect($this->generateUrl('success'));
+            return $this->redirect($this->generateUrl('list_tasks'));
         }
 
-
-        return $this->render('task/new.html.twig', array(
+        return $this->render('task/task.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -54,23 +49,20 @@ class TaskController extends Controller
 
     /**
      * @Route("/edittask/{id}", name="edit_task")
+     * @Method("POST")
      */
     public function editTaskAction(Request $request, Task $task)
     {
-
-
         $form = $this->createForm(new TaskType(), $task);
-
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirect($this->generateUrl('success'));
+            return $this->redirect($this->generateUrl('list_tasks'));
         }
 
-
-        return $this->render('task/new.html.twig', array(
+        return $this->render('task/task.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -83,19 +75,32 @@ class TaskController extends Controller
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
         $tasks = $repository->findAll();
-
-
         return $this->render('task/list.html.twig', array('tasks' => $tasks));
     }
 
-
     /**
-     * @Route("/success", name="success")
+     * @Route("/deletetask/{id}", name="delete_task")
+     * @Method("POST")
      */
-    public function successAction()
+    public function deleteTaskAction(Request $request, Task $task)
     {
-        return $this->render('task/success.html.twig');
-    }
+        $form = $this->createForm(new YesNoType(), $task);
+        $form->handleRequest($request);
 
+        if ($form->isValid()) {
+            if ($form->get('tak')->isClicked()) {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($task);
+                $em->flush();
+
+            }
+            return $this->redirect($this->generateUrl('list_tasks'));
+        }
+
+        return $this->render('task/delete.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 
 }
