@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\CategoryType;
-use AppBundle\Form\Type\YesNoType;
 
 
 
@@ -72,22 +71,20 @@ class CategoryController extends Controller
      */
     public function DelCategoryAction(Request $request, Category $category)
     {
-        $form = $this->createForm(new YesNoType());
+        return $this->render('category/categoryDelete.html.twig', array('category' => $category) );
+    }
 
-        if($form->handleRequest($request)->isValid()) {
-            if($form->get('tak')->isClicked()) {
-                $form = $this->createForm(new CategoryType(), $category);
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->remove($category);
-                $entityManager->flush(); 
-           
-                return $this->redirect($this->generateUrl('listCat'));                
-            } else {
-                return $this->redirect($this->generateUrl('listCat'));                
-            }
-        }
-
-        return $this->render('category/categoryDelete.html.twig', array('category' => $category, 'form' => $form->createView()));
+    /**
+     * @Route("/category/delete/accepted/{id}", name="accDelCat")
+     */
+    public function DeleteCategoryAction(Request $request, Category $category) {   
+        
+        $form = $this->createForm(new CategoryType(), $category);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($category);
+        $entityManager->flush(); 
+   
+        return $this->redirect($this->generateUrl('listCat'));
     }
 }
 
