@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Form\Type\UserType;
-
+use AppBundle\Form\Type\YesNoType;
 
 class UserController extends Controller
 {
@@ -85,17 +85,20 @@ class UserController extends Controller
      */
     public function deleteUserAction(Request $request, User $user)
     {
-        $r = $request->request->get('del');
+        $form = $this->createForm(new YesNoType());
 
-        if($r == 'Yes'){
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
+        if ($form->handleRequest($request)->isValid()) {
+            if ($form->get('tak')->isClicked()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($user);
+                $em->flush();
+                return $this->redirect($this->generateUrl('displayUsers'));
+            }
         }
 
         return $this->render(
             'user/delete.html.twig',
-            array('user' => $user,));
+            array('form' => $form->createView(), 'user' => $user,));
     }
 
 }
