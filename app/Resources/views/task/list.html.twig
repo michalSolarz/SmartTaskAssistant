@@ -3,8 +3,9 @@
 
 {% block body %}
     <h1>Tasks</h1>
-    <p><a href={{ path("new_task") }}>New task</a></p>
+    <p><a href="{{ path("new_task") }}" class="btn btn-success">+ Add task</a></p>
     <table class="table">
+        <thead>
         <tr>
             <th>Description</th>
             <th>Due date</th>
@@ -16,6 +17,7 @@
             <th></th>
             <th></th>
         </tr>
+        </thead>
         {% for task in tasks %}
             <tr>
                 <td>{{ task.getContent() }}</td>
@@ -25,8 +27,14 @@
                 <td>{{ task.getAssignee().getName() }}</td>
                 <td>{{ task.getCreatedBy().getName() }}</td>
                 <td>{{ task.getCategory().getName() }}</td>
-                <td><form action="{{ path('edit_task', {id: task.id}) }}" method="post"><input type="submit" value="Edit"></form></td>
-                <td><form action="{{ path('delete_task', {id: task.id}) }}" method="post"><input type="submit" value="Delete"></form></td>
+                <td>
+                    <form action="{{ path('edit_task', {id: task.id}) }}" method="post"><input type="submit"
+                                                                                               value="Edit"></form>
+                </td>
+                <td>
+                    <form action="{{ path('delete_task', {id: task.id}) }}" method="post"><input type="submit"
+                                                                                                 value="Delete"></form>
+                </td>
             </tr>
         {% endfor %}
     </table>
