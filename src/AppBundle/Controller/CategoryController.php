@@ -64,7 +64,7 @@ class CategoryController extends Controller
             return $this->redirect($this->generateUrl('listCat'));
         }
 
-        return $this->render('category/categoryEdit.html.twig', array('form' => $form->createView()));;
+        return $this->render('category/categoryEdit.html.twig', array('category' => $category, 'form' => $form->createView()));;
     }
 
     /**
