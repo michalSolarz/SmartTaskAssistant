@@ -64,8 +64,7 @@ class Task
 
     public function __construct()
     {
-        $now = new \DateTime('now');
-        $this->setCreatedAt($now);
+        $this->setCreatedAt(new \DateTime('now'));
     }
 
 
@@ -179,8 +178,9 @@ class Task
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
-
+        if (!isset($this->createdAt)) {
+            $this->createdAt = $createdAt;
+        }
         return $this;
     }
 
