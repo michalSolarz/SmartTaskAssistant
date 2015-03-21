@@ -62,10 +62,7 @@ class User implements UserInterface, \Serializable
      **/
     protected $createdCategories;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Notification", mappedBy="createdBy", cascade={"remove"})
-     **/
-    protected $createdNotifications;
+
  
 
  
