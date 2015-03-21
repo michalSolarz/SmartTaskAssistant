@@ -7,6 +7,7 @@
  */
 namespace AppBundle\Entity;
 
+use AppBundle\Interfaces\entityAuthorInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -14,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="category")
  */
-class Category
+class Category implements entityAuthorInterface
 {
     /**
      * @ORM\Column(type="integer", name="cat_id")
@@ -138,7 +139,7 @@ class Category
      * @param \AppBundle\Entity\User $createdBy
      * @return Category
      */
-    public function setCreatedBy(\AppBundle\Entity\User $createdBy = null)
+    public function setCreatedBy(\AppBundle\Entity\User $createdBy)
     {
         $this->createdBy = $createdBy;
 

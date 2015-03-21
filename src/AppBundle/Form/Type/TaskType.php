@@ -16,7 +16,6 @@ class TaskType extends AbstractType
             ->add('done', 'checkbox', array('required' => false))
             ->add('priority', 'choice', array('choices' => array('l' => 'low', 'm' => 'medium', 'h' => 'high', 'u' => 'urgent')))
             ->add('assignee', 'entity', ['class' => 'AppBundle:User', 'property' => 'name'])
-            ->add('createdBy', 'entity', ['class' => 'AppBundle:User', 'property' => 'name'])
             ->add('category', 'entity', ['class' => 'AppBundle:Category', 'property' => 'name']);
 
 
