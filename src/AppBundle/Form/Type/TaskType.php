@@ -38,7 +38,6 @@ class TaskType extends AbstractType
             ]);
 
 
-
     }
 
 
