@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\UserBundle\Entity;
+namespace AppBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
