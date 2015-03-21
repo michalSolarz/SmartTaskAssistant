@@ -10,6 +10,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
 
 /**
  * Class Appointment
@@ -38,21 +40,34 @@ class Appointment
     protected $createdBy;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppointmentWithUser", mappedBy="appointment")
-     * @ORM\JoinColumn(name="app_with_user", referencedColumnName="app_with_user_id", nullable=false, onDelete="CASCADE")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="appointments")
+     * @ORM\JoinTable(name="user_appointment",
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="use_id")},
+     *      inverseJoinColumns={@JoinColumn(name="appointment_id", referencedColumnName="app_id")}
+     *      )
      */
     protected $withUser;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppointmentWithUser", mappedBy="appointment")
-     * @ORM\JoinColumn(name="app_with_external_person", referencedColumnName="app_with_user_id", nullable=false, onDelete="CASCADE")
+     * @ORM\ManyToMany(targetEntity="ExternalPerson", mappedBy="appointments")
      */
     protected $withExternalPerson;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->withUser = new ArrayCollection();
+        $this->withExternalPerson = new ArrayCollection();
+        $this->setCreatedAt(new \DateTime('now'));
+    }
+
+
+    /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -75,7 +90,7 @@ class Appointment
     /**
      * Get createdAt
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getCreatedAt()
     {
@@ -98,7 +113,7 @@ class Appointment
     /**
      * Get createdBy
      *
-     * @return \AppBundle\Entity\User
+     * @return \AppBundle\Entity\User 
      */
     public function getCreatedBy()
     {
@@ -106,24 +121,15 @@ class Appointment
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->withUser = new ArrayCollection();
-        $this->withExternalPerson = new ArrayCollection();
-        $this->setCreatedAt(new \DateTime('now'));
-    }
-
-    /**
      * Add withUser
      *
-     * @param \AppBundle\Entity\AppointmentWithUser $withUser
+     * @param \AppBundle\Entity\User $withUser
      * @return Appointment
      */
-    public function addWithUser(\AppBundle\Entity\AppointmentWithUser $withUser)
+    public function addWithUser(\AppBundle\Entity\User $withUser)
     {
         $this->withUser[] = $withUser;
+
 
         return $this;
     }
@@ -131,9 +137,9 @@ class Appointment
     /**
      * Remove withUser
      *
-     * @param \AppBundle\Entity\AppointmentWithUser $withUser
+     * @param \AppBundle\Entity\User $withUser
      */
-    public function removeWithUser(\AppBundle\Entity\AppointmentWithUser $withUser)
+    public function removeWithUser(\AppBundle\Entity\User $withUser)
     {
         $this->withUser->removeElement($withUser);
     }
@@ -141,7 +147,7 @@ class Appointment
     /**
      * Get withUser
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getWithUser()
     {
@@ -151,10 +157,10 @@ class Appointment
     /**
      * Add withExternalPerson
      *
-     * @param \AppBundle\Entity\AppointmentWithUser $withExternalPerson
+     * @param \AppBundle\Entity\ExternalPerson $withExternalPerson
      * @return Appointment
      */
-    public function addWithExternalPerson(\AppBundle\Entity\AppointmentWithUser $withExternalPerson)
+    public function addWithExternalPerson(\AppBundle\Entity\ExternalPerson $withExternalPerson)
     {
         $this->withExternalPerson[] = $withExternalPerson;
 
@@ -164,9 +170,9 @@ class Appointment
     /**
      * Remove withExternalPerson
      *
-     * @param \AppBundle\Entity\AppointmentWithUser $withExternalPerson
+     * @param \AppBundle\Entity\ExternalPerson $withExternalPerson
      */
-    public function removeWithExternalPerson(\AppBundle\Entity\AppointmentWithUser $withExternalPerson)
+    public function removeWithExternalPerson(\AppBundle\Entity\ExternalPerson $withExternalPerson)
     {
         $this->withExternalPerson->removeElement($withExternalPerson);
     }
@@ -174,7 +180,7 @@ class Appointment
     /**
      * Get withExternalPerson
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getWithExternalPerson()
     {

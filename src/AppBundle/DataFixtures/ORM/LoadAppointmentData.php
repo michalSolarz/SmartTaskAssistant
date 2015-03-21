@@ -27,6 +27,7 @@ class LoadAppointmentData extends AbstractFixture implements OrderedFixtureInter
         for ($i = 0; $i < 10; $i++) {
             $appointment = new Appointment();
             $appointment->setCreatedBy($this->getReference('user-' . $i));
+            $appointment->addWithUser($this->getReference('user-' . $i));
             $manager->persist($appointment);
 
             $this->setReference('appointment-' . $i, $appointment);

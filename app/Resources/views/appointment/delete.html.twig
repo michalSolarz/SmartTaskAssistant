@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p>Are you sure that you want to delete user: '{{ user.name | escape }}'</p>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.tak |escape) }}
+    {{ form_row(form.nie |escape) }}
+
+    {{ form_end(form) }}
+{% endblock %}

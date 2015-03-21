@@ -10,6 +10,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * Class ExternalPerson
@@ -37,8 +39,14 @@ class ExternalPerson
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppointmentWithExternalPerson", mappedBy="externalPerson")
-     * @ORM\JoinColumn(name="app_with_external_person", referencedColumnName="app_with_external_person_id", nullable=false, onDelete="CASCADE")
+     * @ORM\ManyToMany(targetEntity="Appointment", inversedBy="withExternalPerson")
+     */
+    /**
+     * @ORM\ManyToMany(targetEntity="Appointment", inversedBy="withUser")
+     * @ORM\JoinTable(name="external_person_appointments",
+     *      joinColumns={@JoinColumn(name="external_person_id", referencedColumnName="ext_person_id")},
+     *      inverseJoinColumns={@JoinColumn(name="appointment_id", referencedColumnName="app_id")}
+     *      )
      */
     protected $appointments;
     /**

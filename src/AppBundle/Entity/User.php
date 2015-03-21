@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
 
 
 /**
@@ -59,8 +61,11 @@ class User
     protected $createdAppointments;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppointmentWithUser", mappedBy="user")
-     * @ORM\JoinColumn(name="app_with_user", referencedColumnName="app_with_user_id", nullable=false, onDelete="CASCADE")
+     * @ORM\ManyToMany(targetEntity="Appointment", inversedBy="withUser")
+     * @ORM\JoinTable(name="user_appointment",
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="use_id")},
+     *      inverseJoinColumns={@JoinColumn(name="appointment_id", referencedColumnName="app_id")}
+     *      )
      */
     protected $appointments;
 
@@ -78,10 +83,11 @@ class User
     }
 
 
+
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -104,7 +110,7 @@ class User
     /**
      * Get email
      *
-     * @return string
+     * @return string 
      */
     public function getEmail()
     {
@@ -127,7 +133,7 @@ class User
     /**
      * Get password
      *
-     * @return string
+     * @return string 
      */
     public function getPassword()
     {
@@ -150,7 +156,7 @@ class User
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
@@ -165,22 +171,20 @@ class User
      */
     public function setCreatedAt($createdAt)
     {
-        if (!isset($this->createdAt)) {
-            $this->createdAt = $createdAt;
-        }
+        $this->createdAt = $createdAt;
+
         return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
-
 
     /**
      * Add createdTasks
@@ -208,7 +212,7 @@ class User
     /**
      * Get createdTasks
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCreatedTasks()
     {
@@ -241,7 +245,7 @@ class User
     /**
      * Get assignedTasks
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getAssignedTasks()
     {
@@ -274,7 +278,7 @@ class User
     /**
      * Get createdCategories
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCreatedCategories()
     {
@@ -307,7 +311,7 @@ class User
     /**
      * Get createdAppointments
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCreatedAppointments()
     {
@@ -317,12 +321,13 @@ class User
     /**
      * Add appointments
      *
-     * @param \AppBundle\Entity\AppointmentWithUser $appointments
+     * @param \AppBundle\Entity\Appointment $appointments
      * @return User
      */
-    public function addAppointment(\AppBundle\Entity\AppointmentWithUser $appointments)
+    public function addAppointment(\AppBundle\Entity\Appointment $appointments)
     {
         $this->appointments[] = $appointments;
+        $appointments->addWithUser($this);
 
         return $this;
     }
@@ -330,9 +335,9 @@ class User
     /**
      * Remove appointments
      *
-     * @param \AppBundle\Entity\AppointmentWithUser $appointments
+     * @param \AppBundle\Entity\Appointment $appointments
      */
-    public function removeAppointment(\AppBundle\Entity\AppointmentWithUser $appointments)
+    public function removeAppointment(\AppBundle\Entity\Appointment $appointments)
     {
         $this->appointments->removeElement($appointments);
     }
@@ -340,7 +345,7 @@ class User
     /**
      * Get appointments
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getAppointments()
     {
