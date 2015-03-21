@@ -23,16 +23,9 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-//        $session = $this->get('session');
-        $user = $this->getUser();
-
-
-         $em = $this->getDoctrine()->getRepository('AppBundle:Category');
-         $categories = $em->findBy(array('createdBy' => $user));
-        //$query = $em->createQuery('SELECT cat_name, cat_color, cat_created, created_by FROM AppBundle:Category');
-        //$categories = $query->getResult();
-
-        return $this->render('category/categoryList.html.twig', array('categories' => $categories));
+        return $this->render('category/categoryList.html.twig',
+            array('categories' => $this->get('app_bundle.providers.list')->getCreatedByUser('AppBundle:Category')
+            ));
     }
 
 
@@ -49,7 +42,6 @@ class CategoryController extends Controller
 
 	    if($form->handleRequest($request)->isValid()) {
 	    	$entityManager = $this->getDoctrine()->getManager();
-//            $category->setCreatedBy($this->getUser());
 	    	$entityManager->persist($category);
 	    	$entityManager->flush();
 	    	return $this->redirect($this->generateUrl('listCat'));
