@@ -40,6 +40,7 @@ class CategoryController extends Controller
 	    $category = new Category();
 	    $form = $this->createForm(new CategoryType(), $category);
 
+
 	    if($form->handleRequest($request)->isValid()) {
 	    	$entityManager = $this->getDoctrine()->getManager();
 	    	$entityManager->persist($category);

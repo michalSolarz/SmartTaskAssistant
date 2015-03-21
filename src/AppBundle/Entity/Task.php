@@ -289,6 +289,9 @@ class Task
             case 'urgent':
                 $p = 'urgent';
                 break;
+
+            default:
+                $p='none';
         }
         return $p;
     }

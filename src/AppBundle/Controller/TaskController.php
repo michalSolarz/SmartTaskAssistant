@@ -28,7 +28,7 @@ class TaskController extends Controller
     public function newTaskAction(Request $request)
     {
         $task = new Task();  //*
-        $form = $this->createForm(new TaskType(), $task);  //*
+        $form = $this->createForm('task', $task);  //*
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -53,8 +53,16 @@ class TaskController extends Controller
      */
     public function editTaskAction(Request $request, Task $task)
     {
-        $form = $this->createForm(new TaskType(), $task);
+
+$user = $request->getUser();
+
+
+        $form = $this->createForm('task',$task);
+
         $form->handleRequest($request);
+
+
+
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -73,8 +81,14 @@ class TaskController extends Controller
      */
     public function listTasksAction(Request $request)
     {
+
+        $user = $request->getUser();
+
+
         $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
         $tasks = $repository->findAll();
+
+
         return $this->render('task/list.html.twig', array('tasks' => $tasks));
     }
 

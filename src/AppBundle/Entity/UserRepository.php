@@ -20,6 +20,8 @@ class UserRepository extends EntityRepository implements UserProviderInterface
             ->setParameter('email', $username)
             ->getQuery();
 
+
+
         try {
             // The Query::getSingleResult() method throws an exception
             // if there is no record matching the criteria.
