@@ -46,13 +46,13 @@ class Task
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedTasks")
-     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="use_id")
+     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="use_id", onDelete="CASCADE")
      */
     protected $assignee;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
-     * @ORM\JoinColumn(name="created_by_id", referencedColumnName="use_id", nullable=false)
+     * @ORM\JoinColumn(name="created_by_id", referencedColumnName="use_id", nullable=false, onDelete="CASCADE")
      */
     protected $createdBy;
 
@@ -61,18 +61,17 @@ class Task
      * @ORM\JoinColumn(name="category", referencedColumnName="cat_id")
      */
     protected $category;
-    
+
     public function __construct()
     {
-        $now = new \DateTime('now');
-        $this->setCreatedAt($now);
+        $this->setCreatedAt(new \DateTime('now'));
     }
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -95,7 +94,7 @@ class Task
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -118,7 +117,7 @@ class Task
     /**
      * Get dueDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDueDate()
     {
@@ -141,7 +140,7 @@ class Task
     /**
      * Get done
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getDone()
     {
@@ -164,7 +163,7 @@ class Task
     /**
      * Get priority
      *
-     * @return integer 
+     * @return integer
      */
     public function getPriority()
     {
@@ -179,18 +178,119 @@ class Task
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
-
+        if (!isset($this->createdAt)) {
+            $this->createdAt = $createdAt;
+        }
         return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
+
+    /**
+     * Set assignee
+     *
+     * @param \AppBundle\Entity\User $assignee
+     * @return Task
+     */
+    public function setAssignee(\AppBundle\Entity\User $assignee = null)
+    {
+        $this->assignee = $assignee;
+
+        return $this;
+    }
+
+    /**
+     * Get assignee
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getAssignee()
+    {
+        return $this->assignee;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \AppBundle\Entity\User $createdBy
+     * @return Task
+     */
+    public function setCreatedBy(\AppBundle\Entity\User $createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     * @return Task
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function getDueDateAsString()
+    {
+        return date_format($this->dueDate, 'Y-m-d');
+    }
+
+    public function getDoneAsYesNo()
+    {
+        return $this->done ? 'yes' : 'no';
+    }
+
+    public function getPriorityAsString()
+    {
+
+        switch ($this->priority) {
+            case 'low':
+                $p = 'low';
+                break;
+            case 'medium':
+                $p = 'medium';
+                break;
+            case 'high':
+                $p = 'high';
+                break;
+            case 'urgent':
+                $p = 'urgent';
+                break;
+        }
+        return $p;
+    }
+
 }

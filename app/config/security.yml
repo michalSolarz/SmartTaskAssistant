@@ -1,12 +1,28 @@
 security:
+    encoders:
+        AppBundle\Entity\User: bcrypt
+
     providers:
-        in_memory:
-            memory: ~
+        database_users:
+            entity: { class: AppBundle:User}
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
 
-        default:
-            anonymous: ~
+        secured_area:
+                    pattern: ^/
+                    anonymous: true
+                    form_login:
+                             check_path: login_check
+                             login_path: login_form
+                    logout:
+                             path: logout
+                             target: hello
+
+    access_control:
+           - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+           - { path: ^/hello$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+           - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+           - { path: ^/, role: ROLE_USER }

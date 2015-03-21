@@ -26,9 +26,16 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     {
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
+<<<<<<< HEAD
             $user->setName('User ' . $i);
             $user->setEmail('user' . $i . '@localhost');
             $user->setPassword(time());
+=======
+            $user->setUsername('Username'. $i);
+            $user->setName('User ' . $i);
+            $user->setEmail('user' . $i . '@localhost');
+            $user->setPassword('123456');
+>>>>>>> 4e578a5d5bf4e11815f8c4e6a2b2b7e0419aef08
 
             $manager->persist($user);
 
