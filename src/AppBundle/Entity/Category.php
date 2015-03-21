@@ -35,13 +35,13 @@ class Category implements entityAuthorInterface
     protected $color;
 
     /**
-     * @ORM\Column(type="datetime", length=100, name="cat_created")
+     * @ORM\Column(type="datetime", name="cat_created")
      */
     protected $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdCategories")
-     * @ORM\JoinColumn(name="created_by", referencedColumnName="use_id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="use_id", nullable=false)
      */
     protected $createdBy;
 
