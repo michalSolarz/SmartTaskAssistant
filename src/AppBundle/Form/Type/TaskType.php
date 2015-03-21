@@ -43,8 +43,6 @@ class TaskType extends AbstractType
 
 
 
-
-
     public function getName()
     {
         return 'task';
