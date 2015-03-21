@@ -47,7 +47,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface
             );
         }
 
-        return $this->find($user->getUsername());   //getId?
+        return $this->find($user->getId());
     }
 
     public function supportsClass($class)
