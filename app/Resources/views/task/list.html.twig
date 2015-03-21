@@ -20,10 +20,10 @@
         </thead>
         {% for task in tasks %}
             <tr>
-                <td>{{ task.getContent() }}</td>
+                <td>{{ task.content }}</td>
                 <td>{{ task.getDueDateAsString() }}</td>
                 <td>{{ task.getDoneAsYesNo() }}</td>
-                <td>{{ task.getPriorityAsString() }}</td>
+                <td>{{ task.priority}}</td>
                 <td>{{ task.getAssignee().getName() }}</td>
                 <td>{{ task.getCreatedBy().getName() }}</td>
                 <td>{{ task.getCategory().getName() }}</td>

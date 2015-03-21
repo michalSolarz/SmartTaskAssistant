@@ -54,15 +54,12 @@ class TaskController extends Controller
     public function editTaskAction(Request $request, Task $task)
     {
 
-$user = $request->getUser();
 
-
-        $form = $this->createForm('task',$task);
+        $form = $this->createForm('task', $task);
 
         $form->handleRequest($request);
 
-
-
+        
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

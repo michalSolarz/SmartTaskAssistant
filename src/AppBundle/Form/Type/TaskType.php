@@ -19,7 +19,7 @@ class TaskType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-$token = $this->tokenStorage->getToken();
+     $token = $this->tokenStorage->getToken();
      $user =    $token->getUser();
 
         $builder
@@ -28,7 +28,6 @@ $token = $this->tokenStorage->getToken();
             ->add('done', 'checkbox', array('required' => false))
             ->add('priority', 'choice', array('choices' => array('l' => 'low', 'm' => 'medium', 'h' => 'high', 'u' => 'urgent')))
             ->add('assignee', 'entity', ['class' => 'AppBundle:User', 'property' => 'name'])
-            ->add('createdBy', 'entity', ['class' => 'AppBundle:User', 'property' => 'name'])
             ->add('category', 'entity', ['class' => 'AppBundle:Category', 'property' => 'name',
                 'query_builder' => function(EntityRepository $er) use ($user) {
                          return $er->createQueryBuilder('c')
@@ -37,6 +36,7 @@ $token = $this->tokenStorage->getToken();
                             ->orderBy('u.username', 'ASC');
                 },
             ]);
+
 
 
     }

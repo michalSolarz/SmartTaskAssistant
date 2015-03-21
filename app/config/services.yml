@@ -4,6 +4,12 @@ parameters:
 #    parameter_name: value
 
 services:
+  entity_author.listener:
+    class: AppBundle\EventListener\EntityAuthor
+    tags:
+      - { name: doctrine.event_listener, event: prePersist }
+    arguments:
+      - "@security.token_storage"
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

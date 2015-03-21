@@ -23,8 +23,12 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
+//        $session = $this->get('session');
+        $user = $this->getUser();
+
+
          $em = $this->getDoctrine()->getRepository('AppBundle:Category');
-         $categories = $em->findAll();
+         $categories = $em->findBy(array('createdBy' => $user));
         //$query = $em->createQuery('SELECT cat_name, cat_color, cat_created, created_by FROM AppBundle:Category');
         //$categories = $query->getResult();
 
@@ -38,11 +42,15 @@ class CategoryController extends Controller
 	public function AddCategoryAction(Request $request)
 	{
 	    $category = new Category();
-	    $form = $this->createForm(new CategoryType(), $category);
+
+        $user = $this->getUser();
+
+	    $form = $this->createForm(new CategoryType($user), $category);
 
 
 	    if($form->handleRequest($request)->isValid()) {
 	    	$entityManager = $this->getDoctrine()->getManager();
+//            $category->setCreatedBy($this->getUser());
 	    	$entityManager->persist($category);
 	    	$entityManager->flush();
 	    	return $this->redirect($this->generateUrl('listCat'));
