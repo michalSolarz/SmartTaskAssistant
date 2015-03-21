@@ -15,6 +15,9 @@ class SecurityController extends Controller
      */
     public function indexAction()
     {
+
+
+        
         return $this->render('security/login.html.twig');
     }
 
