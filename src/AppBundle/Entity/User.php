@@ -49,20 +49,23 @@ class User implements UserInterface, \Serializable
     protected $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy", cascade={"remove"})
      */
     protected $createdTasks;
     /**
-     * @ORM\OneToMany(targetEntity="Task", mappedBy="assignee")
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="assignee", cascade={"remove"})
      **/
     protected $assignedTasks;
 
     /**
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="createdBy")
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="createdBy", cascade={"remove"})
      **/
     protected $createdCategories;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="createdBy", cascade={"remove"})
+     **/
+    protected $createdNotifications;
  
 
  
