@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>My upcoming tasks</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Description</th>
+            <th>Due date</th>
+            <th>Priority</th>
+            <th>Created by</th>
+            <th>Category</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.content }}</td>
+                <td>{{ task.getDueDateAsString() }}</td>
+                <td>{{ task.priority}}</td>
+                <td>{{ task.getCreatedBy().getName() }}</td>
+                <td>{{ task.getCategory().getName() }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -37,6 +37,15 @@ class UserRepository extends EntityRepository implements UserProviderInterface
         return $user;
     }
 
+
+    public function getUpcomingTasks(){
+
+
+
+    }
+
+
+
     public function refreshUser(UserInterface $user)
     {
         $class = get_class($user);
