@@ -26,7 +26,6 @@ class DashboardController extends Controller
     public function indexAction()
     {
         $user = $this->getUser();
-
         $note = "dgdhtdh";
 
         return $this->render('dashboard/dashboard.html.twig',
