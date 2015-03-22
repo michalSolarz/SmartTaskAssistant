@@ -43,10 +43,11 @@ class ListProvider
         $repo = $this->em->getRepository($repo);
         $token = $this->tokenStorageInterface->getToken();
 
-        $id = $token->getUser()->getId();
-
         if ($token) {
-            return $repo->getUsersNotDoneTasks($id);
+
+            $user = $token->getUser();
+
+            return $repo->getUsersNotDoneTasks($user    );
         }
     }
 

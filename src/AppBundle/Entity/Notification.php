@@ -2,12 +2,11 @@
 /**
  * Created by PhpStorm.
  * User: bezimienny
- * Date: 21.03.15
- * Time: 15:28
+ * Date: 22.03.15
+ * Time: 12:19
  */
 
 namespace AppBundle\Entity;
-
 
 use AppBundle\Interfaces\entityAuthorInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,19 +14,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="note")
+ * @ORM\Table(name="notification")
  */
-class Note implements entityAuthorInterface{
-
+class Notification implements entityAuthorInterface
+{
     /**
-     * @ORM\Column(type="integer", name="not_id")
+     * @ORM\Column(type="integer", name="ntf_id")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @ORM\Column(type="datetime", name="not_created")
+     * @ORM\Column(type="datetime", name="ntf_created")
      */
     protected $createdAt;
 
@@ -38,24 +37,22 @@ class Note implements entityAuthorInterface{
     protected $createdBy;
 
     /**
-     * @ORM\Column(type="boolean", name="not_visible")
-     */
-    protected $visible;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, name="ntf_content")
      */
     protected $content;
 
+    /**
+     * @ORM\Column(type="tinyint", name="ntf_status")
+     */
+    protected $status;
+
     public function __construct(){
-        $this->setCreatedAt(new \DateTime('now'));
+        $this->createdAt = new \DateTime('now');
     }
 
-    /**
-     * @param User $createdBy
-     */
-    public function setCreatedBy(User $createdBy){
-        $this->createdBy = $createdBy;
+    public function setCreatedBy(\AppBundle\Entity\User $user)
+    {
+        $this->createdBy = $user;
     }
 
     /**
@@ -72,7 +69,7 @@ class Note implements entityAuthorInterface{
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return Note
+     * @return Notification
      */
     public function setCreatedAt($createdAt)
     {
@@ -95,7 +92,7 @@ class Note implements entityAuthorInterface{
      * Set content
      *
      * @param string $content
-     * @return Note
+     * @return Notification
      */
     public function setContent($content)
     {
@@ -125,25 +122,25 @@ class Note implements entityAuthorInterface{
     }
 
     /**
-     * Set visible
+     * Set status
      *
-     * @param boolean $visible
-     * @return Note
+     * @param \tinyint $status
+     * @return Notification
      */
-    public function setVisible($visible)
+    public function setStatus(\tinyint $status)
     {
-        $this->visible = $visible;
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * Get visible
+     * Get status
      *
-     * @return boolean 
+     * @return \tinyint 
      */
-    public function getVisible()
+    public function getStatus()
     {
-        return $this->visible;
+        return $this->status;
     }
 }
