@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="task")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\TaskRepository")
  */
 class Task implements entityAuthorInterface
 {

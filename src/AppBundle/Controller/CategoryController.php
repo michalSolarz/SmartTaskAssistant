@@ -42,7 +42,6 @@ class CategoryController extends Controller
 
 	    $form = $this->createForm(new CategoryType($user), $category);
 
-
 	    if($form->handleRequest($request)->isValid()) {
 	    	$entityManager = $this->getDoctrine()->getManager();
 //            $category->setCreatedBy($this->getUser());

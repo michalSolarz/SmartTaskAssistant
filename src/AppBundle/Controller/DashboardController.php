@@ -17,7 +17,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 
-
 class DashboardController extends Controller
 {
 
@@ -26,13 +25,12 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getRepository('AppBundle:Task');
-        $tasks = $em->findBy(array('assignee' => $user));
 
+        return $this->render('dashboard/dashboard.html.twig',
+            array('user' => $user, 'notes' => $this->get('app_bundle.providers.list')->getCreatedByUserAndVisible('AppBundle:Note'), 'tasks' => $this->get('app_bundle.providers.list')->getUpcomingTasks('AppBundle:Task')
+            ));
 
-        return $this->render('dashboard/dashboard.html.twig', array('tasks'=>$tasks));
     }
 
 }

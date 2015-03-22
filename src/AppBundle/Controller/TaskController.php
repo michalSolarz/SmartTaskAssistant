@@ -76,7 +76,6 @@ class TaskController extends Controller
      */
     public function listTasksAction(Request $request)
     {
-
         return $this->render('task/list.html.twig',
             array('tasks' => $this->get('app_bundle.providers.list')->getCreatedByUser('AppBundle:Task')
             ));

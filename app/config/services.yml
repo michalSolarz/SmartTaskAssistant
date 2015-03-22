@@ -4,17 +4,19 @@ parameters:
 #    parameter_name: value
 
 services:
-
   app_bundle.providers.list:
     class: AppBundle\Providers\ListProvider
     arguments: [@doctrine.orm.default_entity_manager, @security.token_storage]
-
   entity_author.listener:
     class: AppBundle\EventListener\EntityAuthor
     tags:
       - { name: doctrine.event_listener, event: prePersist }
     arguments:
       - "@security.token_storage"
+  twig.extension.intl:
+    class: Twig_Extensions_Extension_Intl
+    tags:
+    - { name: twig.extension }
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

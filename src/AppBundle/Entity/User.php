@@ -68,6 +68,11 @@ class User implements UserInterface, \Serializable
     protected $createdCategories;
 
     /**
+     * @ORM\OneToMany(targetEntity="Note", mappedBy="createdBy", cascade={"remove"})
+     **/
+    protected $createdNotes;
+ 
+    /**
      * @ORM\ManyToMany(targetEntity="Appointment", inversedBy="users")
      * @ORM\JoinTable(
      *     name="AppointmentHasUsers",
@@ -85,6 +90,10 @@ class User implements UserInterface, \Serializable
 
         $this->createdTasks = new ArrayCollection();
         $this->assignedTasks = new ArrayCollection();
+
+        $this->createdCategories = new ArrayCollection();
+
+        $this->createdNotes = new ArrayCollection();
         $this->appointment = new ArrayCollection();
 
     }
@@ -93,7 +102,6 @@ class User implements UserInterface, \Serializable
     {
         return $this->username;
     }
-
 
     /**
      * Get id
@@ -130,7 +138,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get email
      *
-     * @return string
+     * @return string 
      */
     public function getEmail()
     {
@@ -362,6 +370,40 @@ class User implements UserInterface, \Serializable
     public function getCreatedCategories()
     {
         return $this->createdCategories;
+    }
+
+
+    /**
+     * Add createdCategories
+     *
+     * @param \AppBundle\Entity\Note $createdNotes
+     * @return User
+     */
+    public function addCreatedNote(\AppBundle\Entity\Note $createdNotes)
+    {
+        $this->createdNotes[] = $createdNotes;
+
+        return $this;
+    }
+
+    /**
+     * Remove createdCategories
+     *
+     * @param \AppBundle\Entity\Note $createdNotes
+     */
+    public function removeCreatedNote(\AppBundle\Entity\Note $createdNotes)
+    {
+        $this->createdNotes->removeElement($createdNotes);
+    }
+
+    /**
+     * Get createdCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCreatedNotes()
+    {
+        return $this->createdNotes;
     }
 
    
