@@ -12,6 +12,9 @@
         <tbody>
         {% for appointment in appointments %}
             <tr>
+                <th colspan="4"><h3>{{ appointment.title }}</h3></th>
+            </tr>
+            <tr>
                 <td>
                     <span class="label label-{{appointment.color}}"> &nbsp;&nbsp;&nbsp;</span> <br><br>
                     Title: <strong>{{ appointment.title }}</strong>
