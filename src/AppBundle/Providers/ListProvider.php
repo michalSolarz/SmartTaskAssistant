@@ -37,6 +37,7 @@ class ListProvider
         }
     }
 
+
     public function getUpcomingTasks($repo)
     {
         $repo = $this->em->getRepository($repo);
@@ -47,6 +48,19 @@ class ListProvider
         if ($token) {
             return $repo->getUsersNotDoneTasks($id);
         }
-
     }
+
+    public function getCreatedByUserAndVisible($repo)
+    {
+        $repo = $this->em->getRepository($repo);
+        $token = $this->tokenStorageInterface->getToken();
+
+        if ($token) {
+            return $repo->findBy(array(
+                'createdBy' => $token->getUser(),
+                'visible' => true
+            ));
+        }
+    }
+
 }
