@@ -106,4 +106,32 @@ class TaskController extends Controller
         ));
     }
 
+
+
+    /**
+     * @Route("/donetask/{id}", name="done_task")
+     */
+    public function doneTaskAction(Request $request, Task $task)
+    {
+        $form = $this->createForm(new YesNoType(), $task);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            if ($form->get('tak')->isClicked()) {
+
+                $task->setDone(1);
+
+                $em = $this->getDoctrine()->getManager();
+
+                $em->flush();
+
+            }
+            return $this->redirect($this->generateUrl('dashboard'));
+        }
+
+        return $this->render('task/done.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
 }
