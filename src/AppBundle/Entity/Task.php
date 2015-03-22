@@ -20,45 +20,45 @@ class Task implements entityAuthorInterface
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=100, name="tas_content")
+     * @ORM\Column(type="string", length=100, nullable=true, name="tas_content")
      */
     protected $content;
 
     /**
-     * @ORM\Column(type="date", name="tas_due_date")
+     * @ORM\Column(type="date", nullable=true, name="tas_due_date")
      */
     protected $dueDate;
 
 
     /**
-     * @ORM\Column(type="boolean", name="tas_done")
+     * @ORM\Column(type="boolean", nullable=true, name="tas_done")
      */
     protected $done;
 
     /**
-     * @ORM\Column(type="integer", name="tas_priority")
+     * @ORM\Column(type="integer", nullable=true, name="tas_priority")
      */
     protected $priority;
 
     /**
-     * @ORM\Column(type="datetime", name="tas_created_at")
+     * @ORM\Column(type="datetime", nullable=true, name="tas_created_at")
      */
     protected $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedTasks")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="assignedTasks")
      * @ORM\JoinColumn(name="assignee_id", referencedColumnName="use_id")
      */
     protected $assignee;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="createdTasks")
      * @ORM\JoinColumn(name="created_by_id", referencedColumnName="use_id", nullable=false)
      */
     protected $createdBy;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
      * @ORM\JoinColumn(name="category", referencedColumnName="cat_id")
      */
     protected $category;

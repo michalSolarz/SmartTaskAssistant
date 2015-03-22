@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}Delete:  {{ appointment.title }} ?{% endblock %}
+{% block body %}
+
+
+    Czy na pewno chcesz usunąć spotkanie: <strong>{{ appointment.title | escape }}</strong>
+
+
+
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    {{ form_row(form.tak)}}
+    {{ form_row(form.nie)}}
+    {{ form_end(form) }}
+
+    {#
+    <a class="btn btn-default" href="{{ path('accDelCat', {id: category.id})}}">Tak</a>
+    <a class="btn btn-default" href="{{ path('listCat') }}">Nie</a>
+     #}
+
+{% endblock %}

@@ -58,30 +58,47 @@ class User implements UserInterface, \Serializable
     protected $assignedTasks;
 
     /**
+     * @ORM\OneToMany(targetEntity="Appointment", mappedBy="createdBy")
+     **/
+    protected $appointmentCreate;
+
+    /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="createdBy", cascade={"remove"})
      **/
     protected $createdCategories;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Appointment", inversedBy="users")
+     * @ORM\JoinTable(
+     *     name="AppointmentHasUsers",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="use_id", nullable=false)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="appointment_id", referencedColumnName="apo_id", nullable=false)}
+     * )
+     */
+    protected $appointment;
 
- 
 
- 
 	public function __construct()
     {
         $now = new \DateTime('now');
         $this->setCreatedAt($now);
 
-
         $this->createdTasks = new ArrayCollection();
-
         $this->assignedTasks = new ArrayCollection();
+        $this->appointment = new ArrayCollection();
+
+    }
+
+    function __toString()
+    {
+        return $this->username;
     }
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -113,7 +130,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -136,7 +153,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -159,7 +176,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -182,7 +199,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -274,7 +291,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get createdTasks
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCreatedTasks()
     {
@@ -307,7 +324,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get assignedTasks
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAssignedTasks()
     {
@@ -340,10 +357,77 @@ class User implements UserInterface, \Serializable
     /**
      * Get createdCategories
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCreatedCategories()
     {
         return $this->createdCategories;
+    }
+
+   
+    /**
+     * Add appointment
+     *
+     * @param \AppBundle\Entity\Appointment $appointment
+     * @return User
+     */
+    public function addAppointment(\AppBundle\Entity\Appointment $appointment)
+    {
+        $this->appointment[] = $appointment;
+
+        return $this;
+    }
+
+    /**
+     * Remove appointment
+     *
+     * @param \AppBundle\Entity\Appointment $appointment
+     */
+    public function removeAppointment(\AppBundle\Entity\Appointment $appointment)
+    {
+        $this->appointment->removeElement($appointment);
+    }
+
+    /**
+     * Get appointment
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAppointment()
+    {
+        return $this->appointment;
+    }
+
+    /**
+     * Add appointmentCreate
+     *
+     * @param \AppBundle\Entity\Appointment $appointmentCreate
+     * @return User
+     */
+    public function addAppointmentCreate(\AppBundle\Entity\Appointment $appointmentCreate)
+    {
+        $this->appointmentCreate[] = $appointmentCreate;
+
+        return $this;
+    }
+
+    /**
+     * Remove appointmentCreate
+     *
+     * @param \AppBundle\Entity\Appointment $appointmentCreate
+     */
+    public function removeAppointmentCreate(\AppBundle\Entity\Appointment $appointmentCreate)
+    {
+        $this->appointmentCreate->removeElement($appointmentCreate);
+    }
+
+    /**
+     * Get appointmentCreate
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAppointmentCreate()
+    {
+        return $this->appointmentCreate;
     }
 }

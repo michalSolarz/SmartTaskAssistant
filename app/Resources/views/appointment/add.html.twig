@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add new appointment{% endblock %}
+{% block body %}
+
+    <form method="post" {{ form_enctype(form)}}>
+        {{form_rest(form) }}
+        <input class="btn btn-default" type="submit" value="Zapisz"/>
+    </form>
+
+{% endblock %}
