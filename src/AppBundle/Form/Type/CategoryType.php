@@ -21,8 +21,6 @@ class CategoryType extends AbstractType
         $builder
         	->add('name', 'text')
         	->add('color', 'choice', array( 'choices' =>  array('danger' => 'red', 'success' => 'green', 'info' => 'blue', 'warning' => 'yellow')));
-            //->add('color', 'choice', array( 'choice_list' =>  new ChoiceList(array('r', 'g', 'b'), array('red', 'green', 'blue'))))
-//            ->add('createdBy', 'entity', ['class' => 'AppBundle:User', 'property' => 'name']);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

@@ -349,4 +349,37 @@ class User implements UserInterface, \Serializable
     {
         return $this->createdCategories;
     }
+
+    /**
+     * Add createdNotifications
+     *
+     * @param \AppBundle\Entity\Note $createdNotifications
+     * @return User
+     */
+    public function addCreatedNotification(\AppBundle\Entity\Note $createdNotifications)
+    {
+        $this->createdNotifications[] = $createdNotifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove createdNotifications
+     *
+     * @param \AppBundle\Entity\Note $createdNotifications
+     */
+    public function removeCreatedNotification(\AppBundle\Entity\Note $createdNotifications)
+    {
+        $this->createdNotifications->removeElement($createdNotifications);
+    }
+
+    /**
+     * Get createdNotifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCreatedNotifications()
+    {
+        return $this->createdNotifications;
+    }
 }

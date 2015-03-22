@@ -30,4 +30,16 @@ class ListProvider {
             return $repo->findBy(array('createdBy' => $token->getUser()));
         }
     }
+
+    public function getCreatedByUserAndVisible($repo){
+        $repo = $this->em->getRepository($repo);
+        $token = $this->tokenStorageInterface->getToken();
+
+        if($token){
+            return $repo->findBy(array(
+                'createdBy' => $token->getUser(),
+                'visible' => true
+                ));
+        }
+    }
 }

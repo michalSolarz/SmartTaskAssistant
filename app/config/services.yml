@@ -4,11 +4,6 @@ parameters:
 #    parameter_name: value
 
 services:
-
-  app_bundle.providers.list:
-    class: AppBundle\Providers\ListProvider
-    arguments: [@doctrine.orm.default_entity_manager, @security.token_storage]
-
   entity_author.listener:
     class: AppBundle\EventListener\EntityAuthor
     tags:
