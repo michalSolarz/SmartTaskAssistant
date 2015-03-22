@@ -26,16 +26,13 @@ class DashboardController extends Controller
     public function indexAction()
     {
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getRepository('AppBundle:Task');
-
-        $id = $user->getId();
-        $tasks = $em->getUsersNotDoneTasks($id);
-
 
         $note = "dgdhtdh";
 
+        return $this->render('dashboard/dashboard.html.twig',
+            array('user' => $user, 'note' => $note, 'tasks' => $this->get('app_bundle.providers.list')->getUpcomingTasks('AppBundle:Task')
+            ));
 
-        return $this->render('dashboard/dashboard.html.twig', array('tasks' => $tasks, 'user' => $user, 'note' => $note));
     }
 
 }
