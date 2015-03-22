@@ -14,7 +14,9 @@
                 <h1>{{ user.name }}</h1>
 
                 <div class="sticky">
-                    {{ note }}
+                        {% for note in notes %}
+                            <li>{{ note.content }}</li>
+                        {% endfor %}
                 </div>
 
             </div>

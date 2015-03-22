@@ -26,10 +26,9 @@ class DashboardController extends Controller
     public function indexAction()
     {
         $user = $this->getUser();
-        $note = "dgdhtdh";
 
         return $this->render('dashboard/dashboard.html.twig',
-            array('user' => $user, 'note' => $note, 'tasks' => $this->get('app_bundle.providers.list')->getUpcomingTasks('AppBundle:Task')
+            array('user' => $user, 'notes' => $this->get('app_bundle.providers.list')->getCreatedByUserAndVisible('AppBundle:Note'), 'tasks' => $this->get('app_bundle.providers.list')->getUpcomingTasks('AppBundle:Task')
             ));
 
     }
