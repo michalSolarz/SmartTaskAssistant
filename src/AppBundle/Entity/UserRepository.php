@@ -38,13 +38,6 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     }
 
 
-    public function getUpcomingTasks(){
-
-
-
-    }
-
-
 
     public function refreshUser(UserInterface $user)
     {
