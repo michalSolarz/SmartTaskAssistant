@@ -13,6 +13,10 @@ services:
       - { name: doctrine.event_listener, event: prePersist }
     arguments:
       - "@security.token_storage"
+  twig.extension.intl:
+    class: Twig_Extensions_Extension_Intl
+    tags:
+    - { name: twig.extension }
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

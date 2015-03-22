@@ -28,7 +28,10 @@ class DashboardController extends Controller
         $user = $this->getUser();
 
         return $this->render('dashboard/dashboard.html.twig',
-            array('user' => $user, 'notes' => $this->get('app_bundle.providers.list')->getCreatedByUserAndVisible('AppBundle:Note'), 'tasks' => $this->get('app_bundle.providers.list')->getUpcomingTasks('AppBundle:Task')
+            array('user' => $user,
+                'notes' => $this->get('app_bundle.providers.list')->getCreatedByUserAndVisible('AppBundle:Note'),
+                'tasks' => $this->get('app_bundle.providers.list')->getUpcomingTasks('AppBundle:Task'),
+                'appointments' => $this->get('app_bundle.providers.list')->getCreatedByUser('AppBundle:Appointment')
             ));
 
     }

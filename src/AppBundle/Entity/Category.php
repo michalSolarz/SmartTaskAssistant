@@ -25,22 +25,22 @@ class Category implements entityAuthorInterface
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=100, name="cat_name")
+     * @ORM\Column(type="string", length=100, nullable=true, name="cat_name")
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=100, name="cat_color")
+     * @ORM\Column(type="string", length=100, nullable=true, name="cat_color")
      */
     protected $color;
 
     /**
-     * @ORM\Column(type="datetime", name="cat_created")
+     * @ORM\Column(type="datetime", nullable=true, name="cat_created")
      */
     protected $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdCategories")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="createdCategories")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="use_id", nullable=false)
      */
     protected $createdBy;

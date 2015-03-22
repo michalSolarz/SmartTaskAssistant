@@ -33,7 +33,7 @@ class Note implements entityAuthorInterface{
     protected $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdNotifications")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdNotes")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="use_id", nullable=false)
      */
     protected $createdBy;
