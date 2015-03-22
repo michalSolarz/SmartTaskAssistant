@@ -35,7 +35,7 @@
                     {% for task in tasks %}
                         <tr>
                             <td>{{ task.content }}</td>
-                            <td>{{ task.getDueDateAsString() }}</td>
+                            <td>{{ task.dueDate | localizeddate('medium', 'none', app.request.get('_locale')) }}</td>
                             <td>{{ task.priority}}</td>
                             <td>{{ task.getCreatedBy().getName() }}</td>
                             <td>{{ task.getCategory().getName() }}</td>

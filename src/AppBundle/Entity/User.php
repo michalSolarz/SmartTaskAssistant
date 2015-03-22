@@ -62,7 +62,10 @@ class User implements UserInterface, \Serializable
      **/
     protected $createdCategories;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="Note", mappedBy="createdBy", cascade={"remove"})
+     **/
+    protected $createdNotes;
  
 
  
@@ -75,6 +78,10 @@ class User implements UserInterface, \Serializable
         $this->createdTasks = new ArrayCollection();
 
         $this->assignedTasks = new ArrayCollection();
+
+        $this->createdCategories = new ArrayCollection();
+
+        $this->createdNotes = new ArrayCollection();
     }
 
 
@@ -347,36 +354,37 @@ class User implements UserInterface, \Serializable
         return $this->createdCategories;
     }
 
+
     /**
-     * Add createdNotifications
+     * Add createdCategories
      *
-     * @param \AppBundle\Entity\Note $createdNotifications
+     * @param \AppBundle\Entity\Note $createdNotes
      * @return User
      */
-    public function addCreatedNotification(\AppBundle\Entity\Note $createdNotifications)
+    public function addCreatedNote(\AppBundle\Entity\Note $createdNotes)
     {
-        $this->createdNotifications[] = $createdNotifications;
+        $this->createdNotes[] = $createdNotes;
 
         return $this;
     }
 
     /**
-     * Remove createdNotifications
+     * Remove createdCategories
      *
-     * @param \AppBundle\Entity\Note $createdNotifications
+     * @param \AppBundle\Entity\Note $createdNotes
      */
-    public function removeCreatedNotification(\AppBundle\Entity\Note $createdNotifications)
+    public function removeCreatedNote(\AppBundle\Entity\Note $createdNotes)
     {
-        $this->createdNotifications->removeElement($createdNotifications);
+        $this->createdNotes->removeElement($createdNotes);
     }
 
     /**
-     * Get createdNotifications
+     * Get createdCategories
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCreatedNotifications()
+    public function getCreatedNotes()
     {
-        return $this->createdNotifications;
+        return $this->createdNotes;
     }
 }
