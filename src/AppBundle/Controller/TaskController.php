@@ -94,6 +94,7 @@ class TaskController extends Controller
             if ($form->get('tak')->isClicked()) {
 
                 $em = $this->getDoctrine()->getManager();
+
                 $em->remove($task);
                 $em->flush();
 
