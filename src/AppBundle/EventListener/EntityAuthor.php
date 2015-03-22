@@ -8,6 +8,7 @@
 
 namespace AppBundle\EventListener;
 
+use AppBundle\Entity\Note;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use AppBundle\Entity\Task;
 use AppBundle\Entity\Category;
@@ -41,6 +42,10 @@ class EntityAuthor
             } catch (Exception $e) {
                 throw new \Exception('User not logged');
             }
+        }
+
+        if($entity instanceof Note){
+            $entity->setVisible(true);
         }
 
     }
