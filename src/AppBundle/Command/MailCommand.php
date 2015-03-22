@@ -13,7 +13,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-
+use AppBundle\Entity\Task;
+use AppBundle\Entity\User;
 
 
 class MailCommand extends ContainerAwareCommand
@@ -25,29 +26,33 @@ class MailCommand extends ContainerAwareCommand
     }
 
 
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
 
-      //  $r = $this->getContainer()->get('doctrine')->getRepository('');
-     //   $r->find...
-
-        $email ="fhtfhtf";
-
-        $content = "xD";
-        $subject = "Reminder";
+        $r = $this->getContainer()->get('doctrine.orm.default_entity_manager')->getRepository('AppBundle:Task');
+        $tasks = $r->getTasksForReminder();
 
 
-        $mailer = $this->getContainer()->get('mailer');
-        $message = $mailer->createMessage()
-            ->setSubject($subject)
-            ->setFrom('send@example.com')
-            ->setTo($email)
-            ->setBody($content);
+        foreach ($tasks as $task) {
+            $a = $task->getAssignee();
+            $email = $a->getEmail();
+            $content = $task->getContent();
+
+            $subject = "Reminder";
 
 
-        $mailer->send($message);
+            $mailer = $this->getContainer()->get('mailer');
+            $message = $mailer->createMessage()
+                ->setSubject($subject)
+                ->setFrom('send@example.com')
+                ->setTo($email)
+                ->setBody($content);
+
+
+            $mailer->send($message);
+
+        }
 
         $output->writeln('Sent!');
 

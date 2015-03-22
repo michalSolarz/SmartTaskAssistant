@@ -28,7 +28,7 @@ class AppointmentType extends AbstractType
             ->add('users', 'entity', array( 'class'=> 'AppBundle:User', 'multiple' => true, 'by_reference' => false, 'query_builder' => function(EntityRepository $er) use ($user) {
                 return $er->createQueryBuilder('user')->where( 'user != :p') ->setParameter('p', $user);
             } ))
-            ->add('externalPersons', 'entity', array( 'class'=> 'AppBundle:ExternalPerson', 'multiple' => true, 'by_reference' => false,));
+            ->add('externalPersons', 'entity', array( 'class'=> 'AppBundle:ExternalPerson', 'multiple' => true, 'required'=>false, 'by_reference' => false,));
 
     }
 
